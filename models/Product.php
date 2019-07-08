@@ -102,5 +102,40 @@
 
             return false;
         }
+
+        // Update Product 
+        public function update(){
+            $query = "UPDATE $this->table 
+            SET 
+                title = :title,
+                category_id = :category_id,
+                price = :price
+            WHERE
+                id = :id";
+
+            // Prepared Statement
+            $stmt = $this->conn->prepare($query);
+
+            // Clean data
+            $this->title = htmlspecialchars(strip_tags($this->title));
+            $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+            $this->price = htmlspecialchars(strip_tags($this->price));
+            $this->id = htmlspecialchars(strip_tags($this->id));
+
+            // Bind data to param
+            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":title", $this->title);
+            $stmt->bindParam(":category_id", $this->category_id);
+            $stmt->bindParam(":price", $this->price);
+
+            if($stmt->execute()){
+                return true;
+            };
+
+            // Print error
+            printf("Error: %s./n", $stmt->error);
+
+            return false;
+        }
     }
 ?>
