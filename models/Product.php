@@ -39,7 +39,7 @@
             return $stmt;
         }
 
-        /** READ product from db @return  */
+        /** READ product from db and set model's fields  */
         public function read_single(){
             $query = "SELECT 
                 c.name as category_name,
@@ -71,5 +71,7 @@
             $this->price = $row['price'];
             
         }
+
+        //** */
     }
 ?>
