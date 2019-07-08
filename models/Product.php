@@ -35,7 +35,7 @@
 
             //** Prepared Statement */
             $stmt = $this->conn->prepare($query);
-            $stmt->execure();
+            $stmt->execute();
             return $stmt;
         }
     }
