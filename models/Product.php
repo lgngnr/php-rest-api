@@ -137,5 +137,29 @@
 
             return false;
         }
+
+        // Delete product
+        public function delete(){
+            // query
+            $query = " DELETE from $this->table WHERE id = :id";
+
+            // Prepared Statement
+            $stmt = $this->conn->prepare($query);
+
+            // Clean data
+            $this->id = htmlspecialchars(strip_tags($this->id));
+
+            // Bind data to param
+            $stmt->bindParam(":id", $this->id);
+
+            if($stmt->execute()){
+                return true;
+            };
+
+            // Print error
+            printf("Error: %s./n", $stmt->error);
+
+            return false;
+        }
     }
 ?>
