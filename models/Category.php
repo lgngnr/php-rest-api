@@ -23,6 +23,20 @@
             return $stmt;
         }
 
+         /** READ single category */
+         public function read_single(){
+            $query = " SELECT * FROM $this->table WHERE id = :id LIMIT 0,1";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":id", $this->id);
+            $stmt->execute();
+            
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->id = $row['id'];
+            $this->name = $row['name'];
+        }
+
     }
 
 ?>
