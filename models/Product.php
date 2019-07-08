@@ -14,7 +14,7 @@
         public $price;
 
         /** Constructor @param $db */
-        public function __constructor($db){
+        public function __construct($db){
             $this->conn = $db;
         }
 
