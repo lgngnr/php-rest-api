@@ -77,6 +77,28 @@
             return false;
         }
 
+        /** Delete category */
+        public function delete(){
+            $query = "DELETE FROM $this->table WHERE id = :id";
+
+            // Prepare stmt
+            $stmt = $this->conn->prepare($query);
+
+            // Clean Data
+            $this->id = htmlspecialchars(strip_tags($this->id));
+
+            // Bind Data
+            $stmt->bindParam(":id", $this->id);
+
+            //Execute
+            if($stmt->execute()){
+                return true;
+            }
+
+            print_r("Error: %s/n", $stmt->error);
+            return false;
+        }
+
     }
 
 ?>
