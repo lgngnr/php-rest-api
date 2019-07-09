@@ -37,6 +37,22 @@
             $this->name = $row['name'];
         }
 
+        /** Create new category  @return boolean */
+        public function create(){
+            $query = " INSERT INTO $this->table SET name = :name";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":name", $this->name);
+
+            if($stmt->execute()){
+                return true;
+            }
+
+            printf("Error: %s/n", $stmt->error);
+            return false;
+
+        }
+
     }
 
 ?>
