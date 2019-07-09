@@ -53,6 +53,30 @@
 
         }
 
+        /** Update category */
+        public function update(){
+            $query = "UPDATE $this->table
+                      SET name = :name
+                      WHERE id = :id";
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+            // Clean data
+            $this->name = htmlspecialchars(strip_tags($this->name));
+            $this->id = htmlspecialchars(strip_tags($this->id));
+            // Bind param
+            $stmt->bindParam(":name", $this->name);
+            $stmt->bindParam(":id", $this->id);
+
+            // Execute
+            if($stmt->execute()){
+                return true;
+            }
+
+            printf("Error: %s/n", $stmt->error);
+            return false;
+        }
+
     }
 
 ?>
